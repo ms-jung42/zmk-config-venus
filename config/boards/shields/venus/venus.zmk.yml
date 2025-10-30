@@ -1,0 +1,11 @@
+file_format: "1"
+id: venus
+name: venus
+type: shield
+url: https://github.com/foostan/crkbd/
+requires: [nice_nano_v2]
+features:
+  - keys
+siblings:
+  - venus_left
+  - venus_right
