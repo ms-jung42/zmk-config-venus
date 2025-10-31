@@ -23,4 +23,5 @@ include:
     shield: venus_left
   - board: nice_nano_v2
     shield: venus_right
-
+  - board: nice_nano_v2
+    shield: settings_reset
