@@ -80,17 +80,17 @@
         };
 
         middlehold {
-            bindings = <&none>;
+            bindings = <&mkp_keepmclk>;
             key-positions = <18 19>;
         };
 
         righthold {
-            bindings = <&none>;
+            bindings = <&mkp_keeprclk>;
             key-positions = <4 5>;
         };
 
         lefthold {
-            bindings = <&none>;
+            bindings = <&mkp_keeplclk>;
             key-positions = <32 33>;
         };
     };
@@ -173,16 +173,43 @@
     };
 
     macros {
-        mkp_keep: mkp_keep {
+        mkp_keeplclk: mkp_keep {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings =
                 <&macro_press>,
-                <&mkp MB1>,
+                <&mkp LCLK>,
                 <&macro_pause_for_release>,
-                <&macro_release>;
+                <&macro_release>,
+                <&mkp LCLK>;
 
             label = "MKP_KEEP";
+        };
+
+        mkp_keeprclk: new_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&mkp RCLK>,
+                <&macro_pause_for_release>,
+                <&macro_release>,
+                <&mkp RCLK>;
+
+            label = "NEW_MACRO";
+        };
+
+        mkp_keepmclk: new_macro2 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&mkp MCLK>,
+                <&macro_pause_for_release>,
+                <&macro_release>,
+                <&mkp MCLK>;
+
+            label = "NEW_MACRO2";
         };
     };
 
