@@ -80,7 +80,7 @@
         };
 
         middlehold {
-            bindings = <&mkp_keepmclk>;
+            bindings = <&mkp MCLK>;
             key-positions = <18 19>;
         };
 
