@@ -1,147 +1,168 @@
 #include <behaviors.dtsi>
-#include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
-#include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/pointing.h>
 
 #define DEFAULT 0
 
-&mt {
-    tapping-term-ms = <140>;
-};
+&mt { tapping-term-ms = <140>; };
 
-&lt {
-    tapping-term-ms = <200>;
-};
+&lt { tapping-term-ms = <200>; };
 
-/ { 
-combos {
-    compatible = "zmk,combos";
+/ {
+    combos {
+        compatible = "zmk,combos";
+
         combo_space {
             timeout-ms = <50>;
             key-positions = <61 70>;
             bindings = <&kp SPACE>;
         };
+
         combo_bt {
             timeout-ms = <50>;
-            key-positions = <0 14>;
+            key-positions = <0 14 13 27>;
             bindings = <&tog 2>;
         };
+
         combo_Rpara {
             timeout-ms = <50>;
             key-positions = <31 32>;
             bindings = <&kp RPAR>;
         };
+
         combo_hash {
             timeout-ms = <50>;
             key-positions = <16 17>;
             bindings = <&hashdash>;
         };
+
         combo_Lpara {
             timeout-ms = <50>;
             key-positions = <29 30>;
             bindings = <&kp LPAR>;
         };
+
         combo_num {
             timeout-ms = <50>;
             key-positions = <30 31>;
             bindings = <&mo 1>;
         };
+
         hr_space {
             timeout-ms = <50>;
             key-positions = <35 36>;
             bindings = <&kp SPACE>;
         };
+
         hr_enter {
             timeout-ms = <50>;
             key-positions = <37 38>;
             bindings = <&kp ENTER>;
         };
-        hr2_enter {
-            timeout-ms = <50>;
-            key-positions = <17 18>;
-            bindings = <&kp ENTER>;
-        };
+
         hr_bkps {
             timeout-ms = <50>;
             key-positions = <36 37>;
             bindings = <&thumblang>;
         };
-        hr_shft {
-            timeout-ms = <50>;
-            key-positions = <18 19>;
-            bindings = <&sk LSHFT>;
-        };
+
         hr_lang1 {
             timeout-ms = <50>;
             key-positions = <21 22>;
             bindings = <&kp LANG1>;
         };
+
         hr2_lang1 {
             timeout-ms = <50>;
             key-positions = <36 61>;
             bindings = <&kp LANG1>;
         };
-    };               
 
+        middlehold {
+            bindings = <&none>;
+            key-positions = <18 19>;
+        };
 
-behaviors {
-    gre: grave_esc {
+        righthold {
+            bindings = <&none>;
+            key-positions = <4 5>;
+        };
+
+        lefthold {
+            bindings = <&none>;
+            key-positions = <32 33>;
+        };
+    };
+
+    behaviors {
+        gre: grave_esc {
             compatible = "zmk,behavior-tap-dance";
             label = "TAP_DANCE";
             #binding-cells = <0>;
             tapping-term-ms = <140>;
             bindings = <&mt LS(GRAVE) GRAVE>, <&kp ESC>;
         };
-    enterspace: enterspace {
+
+        enterspace: enterspace {
             compatible = "zmk,behavior-tap-dance";
             label = "TAP_DANCE_MOD_TAP";
             #binding-cells = <0>;
             tapping-term-ms = <150>;
             bindings = <&spaceback>, <&kp ENTER>;
         };
-    spaceback: spaceback {
+
+        spaceback: spaceback {
             compatible = "zmk,behavior-mod-morph";
             label = "spaceback";
             #binding-cells = <0>;
             bindings = <&kp SPACE>, <&mt LC(BACKSPACE) BACKSPACE>;
+
             mods = <MOD_LSFT>;
-        };          
-    hashdash: hash_dash {
+        };
+
+        hashdash: hash_dash {
             compatible = "zmk,behavior-tap-dance";
             label = "hashdash";
             #binding-cells = <0>;
             tapping-term-ms = <250>;
             bindings = <&kp HASH>, <&kp MINUS>;
         };
-    hrm_dot: jtodot {
+
+        hrm_dot: jtodot {
             compatible = "zmk,behavior-tap-dance";
             label = "jtodot";
             #binding-cells = <0>;
             tapping-term-ms = <250>;
             bindings = <&kp J>, <&kp DOT>;
         };
-    hrm_com: ktocom {
+
+        hrm_com: ktocom {
             compatible = "zmk,behavior-tap-dance";
             label = "ktocom";
             #binding-cells = <0>;
             tapping-term-ms = <250>;
             bindings = <&kp K>, <&kp COMMA>;
         };
-    hrm_lang1: ftolang {
+
+        hrm_lang1: ftolang {
             compatible = "zmk,behavior-tap-dance";
             label = "ftolang";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
             bindings = <&kp H>, <&kp LANG1>;
-        };    
-    thumblang: thumblang {
+        };
+
+        thumblang: thumblang {
             compatible = "zmk,behavior-mod-morph";
             label = "thumblang";
             #binding-cells = <0>;
             bindings = <&kp BACKSPACE>, <&kp DELETE>;
+
             mods = <MOD_LSFT>;
-        };   
-    hotab: behavior_hotab {
+        };
+
+        hotab: behavior_hotab {
             compatible = "zmk,behavior-hold-tap";
             label = "hotab";
             #binding-cells = <2>;
@@ -151,46 +172,71 @@ behaviors {
         };
     };
 
+    macros {
+        mkp_keep: mkp_keep {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&mkp MB1>,
+                <&macro_pause_for_release>,
+                <&macro_release>;
+
+            label = "MKP_KEEP";
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
+
         default_layer {
             bindings = <
-&gre         &mt LS(N1) N1     &mt LS(N2) N2    &mt LS(N3) N3   &mt LS(N4) N4   &mt LS(N5) N5                                     &mt LS(N6) N6     &mt LS(N7) N7    &mt LS(N8) N8   &mt LS(N9) N9     &mt LS(N0) N0       &mt LS(MINUS) MINUS  &mt LS(EQUAL) EQUAL  &kp DELETE
-&kp TAB      &kp Q             &kp W            &kp E           &kp R           &kp T                                             &kp Y             &kp U            &kp I           &kp O             &kp P               &mt LS(LBKT)  LBKT   &mt LS(RBKT) RBKT    &kp NUBS
-&kp LSHFT    &lt 3 A           &kp S            &kp D           &kp F           &kp G                                             &kp H             &hrm_dot         &hrm_com        &kp L             &mt LS(SEMI) SEMI   &kp SQT              &kp ENTER
-&kp LCTRL    &kp LANG2         &kp Z            &kp X           &kp C           &kp V         &kp B                 &kp B         &kp N             &kp M            &kp COMMA       &kp DOT           &mt LS(SLASH) SLASH &kp UP               &kp RSHFT
-&kp LCTRL    &kp LWIN          &kp LALT         &kp DELETE                                    &hotab LSHFT SPACE    &enterspace                                      &kp RALT        &kp RALT          &kp LEFT            &kp DOWN             &kp RIGHT
+&gre       &mt LS(N1) N1  &mt LS(N2) N2  &mt LS(N3) N3  &mt LS(N4) N4  &mt LS(N5) N5                        &mt LS(N6) N6  &mt LS(N7) N7  &mt LS(N8) N8  &mt LS(N9) N9  &mt LS(N0) N0  &mt LS(MINUS) MINUS  &mt LS(EQUAL) EQUAL  &kp DELETE
+&kp TAB    &kp Q          &kp W          &kp E          &kp R          &kp T                                &kp Y          &kp U          &kp I          &kp O          &kp P          &mt LS(LBKT) LBKT    &mt LS(RBKT) RBKT    &kp NUBS
+&kp LSHFT  &lt 3 A        &kp S          &kp D          &kp F          &kp G                                               &kp H          &hrm_dot       &hrm_com       &kp L          &mt LS(SEMI) SEMI    &kp SQT              &kp ENTER
+&kp LCTRL  &kp LANG2      &kp Z          &kp X          &kp C          &kp V          &kp B                 &kp B          &kp N          &kp M          &kp COMMA      &kp DOT        &mt LS(SLASH) SLASH  &kp UP               &kp RSHFT
+&kp LCTRL  &kp LWIN       &kp LALT       &kp DELETE                                   &hotab LSHFT SPACE    &enterspace                                  &sl 4          &kp RALT       &kp LEFT             &kp DOWN             &kp RIGHT
             >;
         };
 
-        nopad_layer {
+        NOPAD_LAYER {
             bindings = <
-&gre         &mt LS(N1) N1     &mt LS(N2) N2    &mt LS(N3) N3   &mt LS(N4) N4   &mt LS(N5) N5                                     &mt LS(N6) N6     &mt LS(N7) N7    &mt LS(N8) N8   &mt LS(N9) N9     &mt LS(N0) N0       &mt LS(MINUS) MINUS  &mt LS(EQUAL) EQUAL  &kp DELETE
-&kp TAB      &kp Q             &kp W            &kp E           &kp R           &kp T                                             &kp Y             &kp U            &kp I           &kp O             &kp P               &mt LS(LBKT)  LBKT   &mt LS(RBKT) RBKT    &kp NUBS
-&kp LSHFT    &lt 3 A           &kp S            &kp D           &kp F           &kp G                                             &kp H             &hrm_dot         &hrm_com        &kp L             &mt LS(SEMI) SEMI   &kp SQT              &kp ENTER
-&kp LCTRL    &kp LANG2         &kp Z            &kp X           &kp C           &kp V         &kp B                 &kp B         &kp N             &kp M            &kp COMMA       &kp DOT           &mt LS(SLASH) SLASH &kp UP               &kp RSHFT
-&kp LCTRL    &kp LWIN          &kp LALT         &kp DELETE                                    &hotab LSHFT SPACE    &enterspace                                      &kp RALT        &kp RALT          &kp LEFT            &kp DOWN             &kp RIGHT
+&trans  &trans  &trans  &trans  &trans  &trans            &kp N1  &kp N2  &kp N3  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans            &kp N4  &kp N5  &kp N6  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                    &kp N7  &kp N8  &kp N9  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans  &kp N0  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans                  &trans    &trans                  &trans  &trans  &trans  &trans  &trans
             >;
         };
 
         blue_layer {
             bindings = <
-&none   &bt BT_SEL 0    &bt BT_SEL 1   &bt BT_SEL 2   &bt BT_SEL 3   &bt BT_SEL 4                            &none    &none   &none   &none   &none   &none   &none   &none
-&none   &none           &none          &none          &none          &none                                   &none    &none   &none   &none   &none   &none   &none   &none
-&none   &bt BT_CLR      &none          &none          &none          &none                                   &none    &none   &none   &none   &none   &none   &none
-&none   &none           &none          &none          &none          &none    &none                 &none    &none    &none   &none   &none   &none   &none   &none
-&none   &none   &none    &none                                                &none                 &none                     &none   &none   &none   &none   &none
+&none  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4           &none  &none  &none  &none  &none  &none  &none  &none
+&none  &none         &none         &none         &none         &none                  &none  &none  &none  &none  &none  &none  &none  &none
+&none  &bt BT_CLR    &none         &none         &none         &none                         &none  &none  &none  &none  &none  &none  &none
+&none  &none         &none         &none         &none         &none         &none    &none  &none  &none  &none  &none  &none  &none  &none
+&none  &none         &none         &none                                     &none    &none                &none  &none  &none  &none  &none
             >;
         };
-        
+
         WASD_layer {
             bindings = <
-&gre         &mt LS(N1) N1     &mt LS(N2) N2    &mt LS(N3) N3   &mt LS(N4) N4   &mt LS(N5) N5                                     &mt LS(N6) N6     &mt LS(N7) N7    &mt LS(N8) N8   &mt LS(N9) N9     &mt LS(N0) N0       &mt LS(MINUS) MINUS  &mt LS(EQUAL) EQUAL  &kp DELETE
-&kp TAB      &kp Q             &kp W            &kp E           &kp R           &kp T                                             &kp Y             &kp U            &kp UP           &kp O             &kp P               &mt LS(LBKT)  LBKT   &mt LS(RBKT) RBKT    &kp NUBS
-&kp LSHFT    &kp A             &kp S            &kp D           &kp F           &kp G                                             &kp H             &kp LEFT         &kp DOWN        &kp RIGHT         &mt LS(SEMI) SEMI   &kp SQT              &kp ENTER
-&kp LCTRL    &kp LANG2         &kp Z            &kp X           &kp C           &kp V         &kp B                 &kp B         &kp N             &kp M            &kp COMMA       &kp DOT           &mt LS(SLASH) SLASH &kp UP               &kp RSHFT
-&kp LCTRL    &kp LWIN          &kp LALT         &kp DELETE                                    &hotab LSHFT SPACE    &enterspace   
+&trans  &trans  &trans  &trans  &trans  &trans            &trans  &trans  &trans    &trans    &trans     &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans            &trans  &trans  &kp UP    &trans    &trans     &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                    &trans  &kp LEFT  &kp DOWN  &kp RIGHT  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans    &trans    &trans     &trans  &trans  &trans
+&trans  &trans  &trans  &trans                  &trans    &trans                    &trans    &trans     &trans  &trans  &trans
+            >;
+        };
+
+        Function {
+            bindings = <
+&kp ESCAPE  &kp F1  &kp F2  &kp F3  &kp F4  &kp F5            &kp F6  &kp F7  &kp F8  &kp F9  &kp F10  &kp F11  &kp F12  &trans
+&trans      &trans  &trans  &trans  &trans  &trans            &trans  &trans  &trans  &trans  &trans   &trans   &trans   &trans
+&trans      &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans   &trans   &trans   &trans
+&trans      &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans   &trans   &trans   &trans
+&trans      &trans  &trans  &trans                  &trans    &trans                  &trans  &trans   &trans   &trans   &trans
             >;
         };
     };
-}; 
+};
