@@ -82,12 +82,12 @@
 
         middlehold {
             bindings = <&mkp MCLK>;
-            key-positions = <18 19>;
+            key-positions = <19 18>;
         };
 
         righthold {
             bindings = <&mkp RCLK>;
-            key-positions = <4 5>;
+            key-positions = <45 46>;
         };
 
         lefthold {
@@ -181,6 +181,16 @@
             flavor = "tap-preferred";
             tapping-term-ms = <250>;
         };
+
+        hotog_sticky: hotog_sticky {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOTOG_STICKY";
+            bindings = <&tog>, <&kp>;
+
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <250>;
+        };
     };
 
     macros {
@@ -229,11 +239,11 @@
 
         default_layer {
             bindings = <
-&gre       &mt LS(N1) N1  &mt LS(N2) N2  &mt LS(N3) N3  &mt LS(N4) N4          &mt LS(N5) N5                        &mt LS(N6) N6  &mt LS(N7) N7  &mt LS(N8) N8  &mt LS(N9) N9  &mt LS(N0) N0  &mt LS(MINUS) MINUS  &mt LS(EQUAL) EQUAL  &kp DELETE
-&kp TAB    &kp Q          &kp W          &kp E          &kp R                  &kp T                                &kp Y          &kp U          &kp I          &kp O          &kp P          &mt LS(LBKT) LBKT    &mt LS(RBKT) RBKT    &kp NUBS
-&kp LSHFT  &lt 3 A        &kp S          &kp D          &hotab_sticky LCTRL F  &kp G                                               &kp H          &hrm_dot       &hrm_com       &kp L          &mt LS(SEMI) SEMI    &kp SQT              &kp ENTER
-&kp LCTRL  &kp LANG2      &kp Z          &kp X          &kp C                  &kp V          &kp B                 &kp B          &kp N          &kp M          &kp COMMA      &kp DOT        &mt LS(SLASH) SLASH  &kp UP               &kp RSHFT
-&kp LCTRL  &kp LWIN       &kp LALT       &kp DELETE                                           &hotab LSHFT SPACE    &enterspace                                  &sl 4          &kp RALT       &kp LEFT             &kp DOWN             &kp RIGHT
+&gre       &mt LS(N1) N1  &mt LS(N2) N2  &mt LS(N3) N3  &mt LS(N4) N4          &mt LS(N5) N5                        &mt LS(N6) N6  &mt LS(N7) N7  &mt LS(N8) N8          &mt LS(N9) N9  &mt LS(N0) N0      &mt LS(MINUS) MINUS  &mt LS(EQUAL) EQUAL  &kp DELETE
+&kp TAB    &kp Q          &kp W          &kp E          &kp R                  &kp T                                &kp Y          &kp U          &kp I                  &kp O          &kp P              &mt LS(LBKT) LBKT    &mt LS(RBKT) RBKT    &kp NUBS
+&kp LSHFT  &lt 3 A        &kp S          &kp D          &hotab_sticky LCTRL F  &kp G                                               &kp H          &hotab_sticky LCTRL J  &kp K          &hotog_sticky 1 L  &mt LS(SEMI) SEMI    &kp SQT              &kp ENTER
+&kp LCTRL  &kp LANG2      &kp Z          &kp X          &kp C                  &kp V          &kp B                 &kp B          &kp N          &kp M                  &kp COMMA      &kp DOT            &mt LS(SLASH) SLASH  &kp UP               &kp RSHFT
+&kp LCTRL  &kp LWIN       &kp LALT       &kp DELETE                                           &hotab LSHFT SPACE    &enterspace                                          &sl 4          &kp RALT           &kp LEFT             &kp DOWN             &kp RIGHT
             >;
         };
 
