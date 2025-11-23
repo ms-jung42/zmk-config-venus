@@ -53,7 +53,7 @@
         hr_space {
             timeout-ms = <50>;
             key-positions = <35 36>;
-            bindings = <&kp SPACE>;
+            bindings = <&hotab DOT SPACE>;
         };
 
         hr_enter {
@@ -66,12 +66,6 @@
             timeout-ms = <50>;
             key-positions = <36 37>;
             bindings = <&thumblang>;
-        };
-
-        hr_lang1 {
-            timeout-ms = <50>;
-            key-positions = <21 22>;
-            bindings = <&kp LANG1>;
         };
 
         hr2_lang1 {
